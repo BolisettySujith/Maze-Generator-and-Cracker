@@ -3,6 +3,7 @@ import time
 import sys
 from collections import deque
 from mazeGenerator import MazeGenerator
+import time
 
 # this is the class for the Maze
 class Maze(turtle.Turtle):               # define a Maze class
@@ -48,107 +49,14 @@ class Yellow(turtle.Turtle):
         self.penup()
         self.speed(0)
 
-
-# grid = [
-# "+++++++++++++++",
-# "+s+       + +e+",
-# "+ +++++ +++ + +",
-# "+ + +       + +",
-# "+ +   +++ + + +",
-# "+ + + +   + + +",
-# "+   + +   + + +",
-# "+++++ +   + + +",
-# "+     +   +   +",
-# "+++++++++++++++",
-# ]
-
-# grid = [
-# "+++++++++",
-# "+ ++s++++",
-# "+ ++ ++++",
-# "+ ++ ++++",
-# "+    ++++",
-# "++++ ++++",
-# "++++ ++++",
-# "+      e+",
-# "+++++++++",
-# ]
-
-# grid = [
-# "+++++++++++++++",
-# "+             +",
-# "+             +",
-# "+             +",
-# "+     e       +",
-# "+             +",
-# "+             +",
-# "+             +",
-# "+ s           +",
-# "+++++++++++++++",
-# ]
-# grid = [
-# "+++++++++++++++++++++++++++++++++++++++++++++++++++",
-# "+               +                                 +",
-# "+  ++++++++++  +++++++++++++  +++++++  ++++++++++++",
-# "+s          +                 +               ++  +",
-# "+  +++++++  +++++++++++++  +++++++++++++++++++++  +",
-# "+  +     +  +           +  +                 +++  +",
-# "+  +  +  +  +  +  ++++  +  +  +++++++++++++  +++  +",
-# "+  +  +  +  +  +  +        +  +  +        +       +",
-# "+  +  ++++  +  ++++++++++  +  +  ++++  +  +  ++   +",
-# "+  +     +  +          +   +           +  +  ++  ++",
-# "+  ++++  +  +++++++ ++++++++  +++++++++++++  ++  ++",
-# "+     +  +     +              +              ++   +",
-# "++++  +  ++++++++++ +++++++++++  ++++++++++  +++  +",
-# "+  +  +                    +     +     +  +  +++  +",
-# "+  +  ++++  +++++++++++++  +  ++++  +  +  +  ++   +",
-# "+  +  +     +     +     +  +  +     +     +  ++  ++",
-# "+  +  +  +++++++  ++++  +  +  +  ++++++++++  ++  ++",
-# "+                       +  +  +              ++  ++",
-# "+ ++++++             +  +  +  +  +++        +++  ++",
-# "+ ++++++ ++++++ +++++++++    ++ ++   ++++++++++  ++",
-# "+ +    +    +++ +     +++++++++ ++  +++++++    + ++",
-# "+ ++++ ++++ +++ + +++ +++    ++    ++    ++ ++ + ++",
-# "+ ++++    +     + +++ +++ ++ ++++++++ ++ ++ ++   ++",
-# "+      ++ +++++++e+++     ++          ++    +++++++",
-# "+++++++++++++++++++++++++++++++++++++++++++++++++++",
-# ]
-
-grid = ['+++++++++++++++++++++++++++', 
-        '+                         +', 
-        '+ ++++++++ ++ +++++ ++ ++ +', 
-        '+ ++++++++ ++ +++++ ++ ++ +', 
-        '+ ++       ++ ++    ++ ++ +', 
-        '++++ ++ ++ +++++ +++++ ++ +', 
-        '++++ ++ ++ +++++ +++++ ++ +', 
-        '+    ++ ++ ++    ++    ++ +', 
-        '++++++++++ ++ +++++++++++ +', 
-        '++++++++++ ++ +++++++++++ +', 
-        '+s         ++ ++          +', 
-        '+ ++++++++++++++++++++ ++ +', 
-        '+ ++++++++++++++++++++ ++ +', 
-        '+ ++                   ++ +', 
-        '++++++++++ ++ ++ ++ ++ ++ +', 
-        '++++++++++ ++ ++ ++ ++ ++ +', 
-        '+          ++ ++ ++ ++ ++ +', 
-        '+ ++++++++ +++++ ++ +++++ +', 
-        '+ ++++++++ +++++ ++ +++++ +', 
-        '+ ++       ++    ++ ++    +', 
-        '+ +++++ +++++ +++++ +++++ +', 
-        '+ +++++ +++++ +++++ +++++ +', 
-        '+ ++    ++    ++    ++    +', 
-        '++++ ++ ++ +++++++++++ ++ +', 
-        '++++ ++ ++ +++++++++++ ++ +', 
-        '+    ++ ++ ++          ++e+', 
-        '+++++++++++++++++++++++++++',
-        ]
+grid = []
 
 class MazeSolver:
-    
+    global grid
     wn = turtle.Screen()               # define the turtle screen
     wn.bgcolor("black")                # set the background colour
     wn.title("A BFS Maze Solving Program")
-    wn.setup(1300,700)                  # setup the dimensions of the working window
+    wn.setup(1600,1024)                  # setup the dimensions of the working window
 
     # set up classes
     maze = Maze()
@@ -173,8 +81,8 @@ class MazeSolver:
                 # print(x)
                 character = grid[y][x]             # assign the varaible "character" the the x and y location od the grid
                 # print(character)
-                screen_x = -588 + (x * 24)         # move to the x location on the screen staring at -588
-                screen_y = 288 - (y * 24)          # move to the y location of the screen starting at 288
+                screen_x = -900 + (x * 24)         # move to the x location on the screen staring at -588
+                screen_y = 488 - (y * 24)          # move to the y location of the screen starting at 288
 
                 if character == "+":
                     self.maze.goto(screen_x, screen_y)         # move pen to the x and y locaion and
@@ -240,16 +148,16 @@ class MazeSolver:
                 #blue.stamp()
                 self.frontier.append(cell)
                 self.visited.add((x, y + 24))
-            self.green.goto(x,y)
-            self.green.stamp()
+            self.blue.goto(x,y)
+            self.blue.stamp()
 
 
     def backRoute(self,x, y):
-        self.yellow.goto(x, y)
-        self.yellow.stamp()
+        self.red.goto(x, y)
+        self.red.stamp()
         while (x, y) != (start_x, start_y):    # stop loop when current cells == start cell
-            self.yellow.goto(self.solution[x, y])        # move the yellow sprite to the key value of solution ()
-            self.yellow.stamp()
+            self.red.goto(self.solution[x, y])        # move the yellow sprite to the key value of solution ()
+            self.red.stamp()
             x, y = self.solution[x, y]               # "key value" now becomes the new key
     
     def Display_maze(self, output_grid):
@@ -259,15 +167,15 @@ class MazeSolver:
         
 
     # main program starts here ####
-    def main(self):    
-        self.setup_maze(grid)
+    def main(self):  
+        self.setup_maze(self.grid)
+        time.sleep(3)
         self.search(start_x,start_y)
         self.backRoute(end_x, end_y)
         self.wn.exitonclick()
 
     def __init__(self):
-        print(self.MazeGrid.main())
-        tempGrid = self.Display_maze(self.MazeGrid.main())
+        self.grid = self.MazeGrid.main()
         self.main()
 
 solver = MazeSolver()
