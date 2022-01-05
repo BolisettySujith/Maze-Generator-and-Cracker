@@ -1,9 +1,12 @@
 import numpy as np
 
+n=0
+p=0
+size=0
 class MazeGenerator:
-    n=1
-    p=0.5
-    size=12
+    global n 
+    global p
+    global size
 
     def carve_maze(self,grid, size):
         output_grid = np.empty([size*3, size*3],dtype=str)
@@ -85,7 +88,7 @@ class MazeGenerator:
 
 
     def __init__(self):
+        self.n = 1
+        self.p = 0.5
+        self.size = int(input("Enter the size of the maze: "))
         self.main()
-
-# MazeGen = MazeGenerator()
-        

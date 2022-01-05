@@ -14,7 +14,6 @@ class Maze(turtle.Turtle):               # define a Maze class
         self.penup()                    # lift up the pen so it do not leave a trail
         self.speed(0)
 
-# this is the class for the finish line - green square in the maze
 class Green(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
@@ -31,8 +30,6 @@ class Blue(turtle.Turtle):
         self.penup()
         self.speed(0)
 
-
-# this is the class for the yellow or turtle
 class Red(turtle.Turtle):
     def __init__(self):
         turtle.Turtle.__init__(self)
@@ -119,16 +116,12 @@ class MazeSolver:
             if(x - 24, y) in self.path and (x - 24, y) not in self.visited:  # check the cell on the left
                 cell = (x - 24, y)
                 self.solution[cell] = x, y    # backtracking routine [cell] is the previous cell. x, y is the current cell
-                #blue.goto(cell)        # identify frontier cells
-                #blue.stamp()
                 self.frontier.append(cell)   # add cell to frontier list
                 self.visited.add((x-24, y))  # add cell to visited list
 
             if (x, y - 24) in self.path and (x, y - 24) not in self.visited:  # check the cell down
                 cell = (x, y - 24)
                 self.solution[cell] = x, y
-                #blue.goto(cell)
-                #blue.stamp()
                 self.frontier.append(cell)
                 self.visited.add((x, y - 24))
                 print(self.solution)
@@ -136,19 +129,15 @@ class MazeSolver:
             if(x + 24, y) in self.path and (x + 24, y) not in self.visited:   # check the cell on the  right
                 cell = (x + 24, y)
                 self.solution[cell] = x, y
-                #blue.goto(cell)
-                #blue.stamp()
                 self.frontier.append(cell)
                 self.visited.add((x +24, y))
 
             if(x, y + 24) in self.path and (x, y + 24) not in self.visited:  # check the cell up
                 cell = (x, y + 24)
                 self.solution[cell] = x, y
-                #blue.goto(cell)
-                #blue.stamp()
                 self.frontier.append(cell)
                 self.visited.add((x, y + 24))
-            self.blue.goto(x,y)
+            self.blue.goto(x,y) # identify frontier cells
             self.blue.stamp()
 
 
@@ -168,14 +157,26 @@ class MazeSolver:
 
     # main program starts here ####
     def main(self):  
+        start_time = time.time()
+        self.grid = self.MazeGrid.main()
+        setup_begin = time.time()
         self.setup_maze(self.grid)
+        setup_end = time.time()
         time.sleep(3)
+        search_begin = time.time()
         self.search(start_x,start_y)
+        search_end = time.time()
+        back_begin = time.time()
         self.backRoute(end_x, end_y)
+        back_end = time.time()
+        End_time = time.time()
+        print("Setup time: ", setup_end - setup_begin)
+        print("Searching time: ", search_end - search_begin)
+        print("Backtracking time: ", back_end - back_begin)
+        print("Total time: ", End_time - start_time)
         self.wn.exitonclick()
 
     def __init__(self):
-        self.grid = self.MazeGrid.main()
         self.main()
 
 solver = MazeSolver()
