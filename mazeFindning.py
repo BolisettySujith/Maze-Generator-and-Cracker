@@ -94,11 +94,13 @@ class MazeSolver:
                     self.green.goto(screen_x, screen_y)       # send green sprite to screen location
                     end_x, end_y = screen_x,screen_y     # assign end locations variables to end_x and end_y
                     self.green.stamp()
-                    self.green.color("green")
+                    self.green.color("red")
 
                 if character == "s":
                     start_x, start_y = screen_x, screen_y  # assign start locations variables to start_x and start_y
-                    self.red.goto(screen_x, screen_y)
+                    self.green.goto(screen_x, screen_y)
+                    self.green.stamp()
+                    self.green.color("green")
 
 
     def endProgram(self):
@@ -167,6 +169,7 @@ class MazeSolver:
         self.search(start_x,start_y)
         search_end = time.time()
         back_begin = time.time()
+        time.sleep(3)
         self.backRoute(end_x, end_y)
         back_end = time.time()
         End_time = time.time()
